@@ -10,3 +10,16 @@ class Test():
 x = Test()
 print(x.class_var)
 print(x.class_var2)
+
+# Instance Variables
+# This variable is created within class in instance method
+class TestIns():
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+y = TestIns('Y', 9)
+print(y.name)
+print(y.age)
+
+# Global variable:
+# It can be accessed anywhere in the project as it is assigned globally

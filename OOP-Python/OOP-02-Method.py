@@ -33,3 +33,27 @@ class DecoratorExample02:
 # Static method: Cannot access anything else in the class. Totally self-contained code.
 de02 = DecoratorExample02()
 de02.example_function()
+
+# Method overloading
+# When a single function acts differently whenever any args are passed.
+# Method overriding:
+# When a parent class is inherited in the child class and the child class has the same name of function,
+# then the parent function of the parent class is overridden
+class Person:
+    def __init__(self, fname, lname):
+        self.firstname = fname
+        self.lastname = lname
+    def printname(self):
+        print(self.firstname, self.lastname)
+
+class Student(Person):
+    def __init__(self, fname, lname, year):
+        self.graduationyear = year
+    def welcome(self):
+        print(f"Welcome to the class of {self.graduationyear}")
+x = Person("Nam", "Ng")
+x.printname()
+# y = Person("Nam", "Ng", 2017) --> TypeError: __init__() takes 3 positional arguments but 4 were given
+y = Student("Nguyen", "Phuc", 2018)
+# y.printname() --> 'Student' object has no attribute 'firstname', because init func is overridden
+y.welcome()
