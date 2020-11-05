@@ -41,3 +41,56 @@ If you do object.__bases__, you will get an empty value.
 """
 Single inheritance is when the class inherits from only one class
 """
+"""
+Exp01: I have a parent class Job with an attribute person_name and a method task. 
+I want to create a child class Teacher inherited from Job and override task with “teach student”.
+The UML diagram looks like this. This is a very simple example, 
+and the only thing we need to do is to override method task()
+"""
+# inheritance-override-method
+class Job:
+    def __init__(self, person_name):
+        self.name = person_name
+
+    def task(self):
+        print("Working")
+
+class Teacher(Job):
+    def task(self):
+        print("teach students")
+
+teacher = Teacher("NamNg")
+teacher.task() # teach students
+
+"""
+Example 2: We still use Job as the parent class, but this time, in addition to overriding task(), 
+I also want to create the child class Teacher with an extra attribute school_name.
+In the UML diagram, we would find a new attribute in the class Teacher
+
+school is a new attribute, so it means that we need to override __init__ method to add the attribute. 
+In this example, we will use a built-in function super().
+In a nutshell, super() returns an object that delegates method calls to a parent class. 
+It allows you to reuse the attributes and behaviors from the parent class. 
+In the code below, super().__init__ will execute everything inside Job.__init__ to avoid duplicated code.
+"""
+class Teacher02(Job):
+    def __init__(self, person_name, school):
+        super().__init__(person_name)
+        self.school = school
+
+    def task(self):
+        print("Working")
+
+teacher02 = Teacher02("DiepNg", "HCMUE")
+print(teacher02.school)
+# HCMUE
+# super() can be used in other methods, so you can also invoke super().task() in the child class.
+"""
+Exp3: In addition to the example 2, 
+I want to prevent class Job from being instantiated because there is no job named Job.
+To make this happen, we will talk about the concept of abstract class in Python. 
+Abstract class is a class that is intended to be inherited but never instantiated. 
+Python provides abc module to define abstract base classes 
+and @abstractmethod decorator to define abstract methods.
+"""
+
