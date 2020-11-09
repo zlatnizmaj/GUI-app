@@ -93,4 +93,60 @@ Abstract class is a class that is intended to be inherited but never instantiate
 Python provides abc module to define abstract base classes 
 and @abstractmethod decorator to define abstract methods.
 """
+from abc import ABC, abstractmethod
+
+class Job2(ABC):
+    def __init__(self, person_name):
+        self.name = person_name
+
+    @abstractmethod
+    def task(self):
+        pass
+
+# job = Job2("Gao") # TypeError: Can't instantiate abstract class Job2 with abstract methods task
+
+"""
+Multi inheritance
+Multi inheritance is when the class inherits from more than one parent class.
+"""
+class Dad:
+    def __init__(self):
+        self.eye_color = "blue"
+        self.hair_color = "black"
+        self.city = "Amsterdam"
+    def swim(self):
+        print("I can swim")
+
+class Mum:
+    def __init__(self):
+        self.eye_color = "brown"
+        self.hair_color = "brown"
+        self.city = "Amsterdam"
+    def dance(self):
+        print("I can dance")
+
+class Kid(Dad, Mum):
+    pass
+"""
+Ok, so the question comes. What is the default eye_color of akid object? 
+When it comes to multi inheritance, the child class will first search the attribute in its own class, 
+if not, then search in its parent classes in depth-first, left-right order. 
+This is called Method Resolution Order (MRO) in Python. 
+MRO defines how Python searches for inherited methods.
+"""
+print(Kid.__mro__)
+kid = Kid()
+print(kid.eye_color) # blue
+print(kid.city) # Amsterdam
+
+kid.swim()
+kid.dance()
+
+class Kid2(Dad, Mum):
+    def __init__(self):
+        Mum.__init__(self) # inherit attributes only from class Mum
+
+kid2 = Kid2()
+print(kid2.eye_color) # brown
+
 
