@@ -5,3 +5,5 @@ It’s written between quotes, either double quotes or single quotes and
 can be as short as zero characters, or empty string, or as long as you wish.
 
 """
+empty_string = " "
+print(empty_string)
